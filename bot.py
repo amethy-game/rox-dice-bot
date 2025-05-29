@@ -10,7 +10,9 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 # Google Sheets API 認証
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+creds_json = base64.b64decode(os.getenv("GOOGLE_CREDENTIALS_BASE64")).decode("utf-8")
+creds_dict = json.loads(creds_json)
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
 gc = gspread.authorize(creds)
 sheet = gc.open("RoxDiceData").worksheet("RoxDiceData")  
 
