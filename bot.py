@@ -8,6 +8,7 @@ from discord.ext import commands
 from datetime import datetime
 
 intents = discord.Intents.default()
+intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 # Google Sheets API 認証
